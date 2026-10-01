@@ -1,0 +1,9 @@
+Panel Logowania (php, mysql)
+1. Tworzenie konta
+	- Weryfikacja czy email, hasła się zgadzają
+	- Tworzenie kodu przywracania dostępu do konta
+2. Logowanie
+	- Sesja
+	- Ustawienia Konta
+3. Zarządzanie użytkownikami (Admin)
+	- Usuwanie kont, manualna zmiana hasła
