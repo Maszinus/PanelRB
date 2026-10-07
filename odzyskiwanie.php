@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sprawdz_kod'])) {
 
         $check = mysqli_prepare(
             $database,
-            "SELECT Id, Email, Rola FROM konta WHERE Kod_odzyskiwania = ?"
+            "SELECT Id, Email, Rola FROM users WHERE Kod_odzyskiwania = ?"
         );
 
         mysqli_stmt_bind_param($check, "s", $hashed);
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['zmien_haslo'])) {
 
             // Haszujemy nowe hasło
             $hashed_password = sha1($nowe_haslo);
-            $update = mysqli_prepare($database,"UPDATE konta SET Haslo = ? WHERE Id = ?");
+            $update = mysqli_prepare($database,"UPDATE users SET Haslo = ? WHERE Id = ?");
             mysqli_stmt_bind_param($update, "si", $hashed_password, $id);
 
             if (mysqli_stmt_execute($update)) {
