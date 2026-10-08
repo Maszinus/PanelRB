@@ -10,20 +10,22 @@
         session_start();
         $_SESSION['access'] = 0;   
     ?>
+    <center>
 <form name="Tworzenie konta" method="POST" action="form.php">
     <h2>Utwórz Konto</h2>
     <input type="email" name="email1" placeholder="Podaj adres email"><br>
     <input type="email" name="email2" placeholder="Powtórz adres email"><br>
     <input type="password" name="passwd1" placeholder="Podaj hasło"><br>
-    <input type="password" name="passwd2" placeholder="Powtórz hasło"><br>
+    <input type="password" name="passwd2" placeholder="Powtórz hasło"><br><br>
     <button type="submit" name="create">Utwórz Konto</button>
 </form>
 <form name="Logowanie" method="POST" action="login.php">
     <h2>Zaloguj</h2>
-    <input type="email" name="email1" placeholder="Podaj adres email"><br>
-    <input type="password" name="passwd1" placeholder="Podaj hasło"><br>
+    <input type="email" name="email" placeholder="Podaj adres email"><br>
+    <input type="password" name="passwd" placeholder="Podaj hasło"><br><br>
     <button type="submit" name="create">Zaloguj</button>
 </form><br>
 <a href="odzyskiwanie.php">Odzyskaj konto</a>
+</center>
 </body>
 </html>

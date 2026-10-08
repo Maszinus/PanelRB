@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$database) {
         $error = 'Błąd połączenia z bazą danych.';
     } else {
-        $check = mysqli_prepare($database, "SELECT Id, Email, Haslo, Rola FROM konta WHERE Email = ?");
+        $check = mysqli_prepare($database, "SELECT Id, Email, Hasło, Rola FROM users WHERE Email = ?");
 
         mysqli_stmt_bind_param($check, "s", $email);
         mysqli_stmt_execute($check);
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Nieprawidłowy e-mail lub hasło.';
         } else {
             $hashed = sha1($passwd);
-            if ($hashed !== $konto['Haslo']) {
+            if ($hashed !== $konto['Hasło']) {
                 $error = 'Nieprawidłowy e-mail lub hasło.';
             } else {
                 $_SESSION['access'] = 1;

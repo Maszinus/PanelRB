@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Błąd połączenia z bazą danych.';
         } else {
             $hashed = sha1($passwd1);
-            $check = mysqli_prepare($database, "SELECT Id FROM konta WHERE Email = '$email1'");
+            $check = mysqli_prepare($database, "SELECT Id FROM users WHERE Email = '$email1'");
             mysqli_stmt_execute($check);
             $result = mysqli_stmt_get_result($check);
             if (mysqli_num_rows($result) > 0) {
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $kod_odz = random_int(100000, 999999);
                     $kod_safe = sha1($kod_odz);
-                    $register = mysqli_prepare($database, "INSERT INTO konta (Email, Haslo, Kod_odzyskiwania, Rola) VALUES ('$email1', '$hashed', '$kod_safe', '1')");
+                    $register = mysqli_prepare($database, "INSERT INTO users (Email, Hasło, Kod_odzyskiwania, Rola) VALUES ('$email1', '$hashed', '$kod_safe', '1')");
                 if (mysqli_stmt_execute($register)) {
                     $_SESSION['access'] = 1;
                     $_SESSION['login'] = $email1;
