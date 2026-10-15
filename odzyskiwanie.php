@@ -93,12 +93,7 @@ mysqli_close($database);
 
     <form name="Odzyskiwanie" method="POST" action="odzyskiwanie.php">
         <h2>Odzyskaj konto</h2>
-        <input
-            type="text"
-            name="kod"
-            placeholder="Podaj kod odzyskiwania"
-            required
-        >
+        <input type="text" name="kod" placeholder="Podaj kod odzyskiwania" required>
         <br>
         <button type="submit" name="sprawdz_kod">
             Sprawdź
@@ -109,19 +104,9 @@ mysqli_close($database);
 
     <form name="NoweHaslo" method="POST" action="odzyskiwanie.php">
         <h2>Ustaw nowe hasło</h2>
-        <input
-            type="password"
-            name="nowe_haslo"
-            placeholder="Nowe hasło"
-            required
-        >
+        <input type="password" name="nowe_haslo" placeholder="Nowe hasło" required>
         <br>
-        <input
-            type="password"
-            name="powtorz_haslo"
-            placeholder="Powtórz nowe hasło"
-            required
-        >
+        <input type="password" name="powtorz_haslo" placeholder="Powtórz nowe hasło" required>
         <br>
         <button type="submit" name="zmien_haslo">
             Zmień hasło
