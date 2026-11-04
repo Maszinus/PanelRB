@@ -5,11 +5,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $passwd = $_POST['passwd'] ?? '';
 
-    $database = mysqli_connect('127.0.0.1', 'root', '', '5td_panel');
-
-    if (!$database) {
-        $error = 'Błąd połączenia z bazą danych.';
+    if (!function_exists('mysqli_connect')) {
+        $error = 'Brak rozszerzenia mysqli w PHP. Włącz PHP MySQL (mysqli) na serwerze.';
     } else {
+        $database = mysqli_connect('127.0.0.1', 'root', '', '5td_panel');
+    }
+
+    if (isset($database) && !$database) {
+        $error = 'Błąd połączenia z bazą danych.';
+    } elseif (isset($database)) {
         $check = mysqli_prepare($database, "SELECT Id, Email, Hasło, Rola FROM users WHERE Email = ?");
 
         mysqli_stmt_bind_param($check, "s", $email);
