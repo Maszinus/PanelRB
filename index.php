@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +10,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <?php
-        session_start();
-        $_SESSION['access'] = 0;
-    ?>
 <main>
     <h1 class="page-title">Panel RB</h1>
     <div class="auth-layout">
