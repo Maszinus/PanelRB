@@ -2,18 +2,18 @@
 
 if($_SESSION['type'] == 2){
     $database = mysqli_connect('127.0.0.1', 'root', '', '5td_panel');
-    
+
     if (!$database) {
         die("Błąd połączenia z bazą danych: " . mysqli_connect_error());
     }
-    
+
     mysqli_set_charset($database, "utf8mb4");
-    
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
         $id = (int)($_POST['id'] ?? 0);
         $email = trim($_POST['email'] ?? '');
         $rola = trim($_POST['rola'] ?? '');
-    
+
         if ($id > 0 && $email !== '' && $rola !== '') {
             $stmt = mysqli_prepare(
                 $database,
@@ -26,7 +26,7 @@ if($_SESSION['type'] == 2){
         header("Location: panel.php");
         exit;
     }
-    
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
         $id = (int)($_POST['id'] ?? 0);
         if ($id > 0) {
@@ -45,22 +45,23 @@ if($_SESSION['type'] == 2){
         $database,
         "SELECT Id, Email, Rola FROM users ORDER BY Id"
     );
-    
+
     if (!$result) {
         die("Błąd zapytania: " . mysqli_error($database));
     }
     ?>
-    
-    <center>
+
+    <section class="panel-section">
     <h2>Zarządzaj Użytkownikami</h2>
-    <table border="1" cellpadding="8" cellspacing="0">
+    <div class="table-wrap">
+    <table>
         <tr>
             <th>ID</th>
             <th>Email</th>
             <th>Rola</th>
             <th>Akcje</th>
         </tr>
-    
+
         <?php while ($user = mysqli_fetch_assoc($result)): ?>
             <tr>
                 <form method="POST" action="panel.php">
@@ -81,7 +82,8 @@ if($_SESSION['type'] == 2){
             </tr>
         <?php endwhile; ?>
     </table>
-    </center>
+    </div>
+    </section>
     <?php
     mysqli_close($database);
 } else {

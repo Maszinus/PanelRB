@@ -4,11 +4,11 @@
 
 if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
     $database = mysqli_connect('127.0.0.1', 'root', '', '5td_panel');
-    
+
     if (!$database) {
         die("Błąd połączenia z bazą danych: " . mysqli_connect_error());
     }
-    
+
     $email = $_SESSION['login'];
 
     // Obsługa zmiany emaila
@@ -21,12 +21,12 @@ if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
             if(mysqli_query($database, $query)) {
                 $_SESSION['login'] = $em1; // Aktualizacja sesji
                 $email = $em1;
-                echo "<p style='color:green; text-align:center;'>Adres email został zmieniony pomyślnie.</p>";
+                echo "<p class='notice success'>Adres email został zmieniony pomyślnie.</p>";
             } else {
-                echo "<p style='color:red; text-align:center;'>Błąd zmiany emaila: " . mysqli_error($database) . "</p>";
+                echo "<p class='notice error'>Błąd zmiany emaila: " . htmlspecialchars(mysqli_error($database)) . "</p>";
             }
         } else {
-            echo "<p style='color:red; text-align:center;'>Podane adresy email muszą być identyczne.</p>";
+            echo "<p class='notice error'>Podane adresy email muszą być identyczne.</p>";
         }
     }
 
@@ -39,20 +39,20 @@ if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
             $hashed_pass = sha1($pass1); // Szyfrowanie hasła funkcją sha1()
             $query = "UPDATE users SET Hasło = '$hashed_pass' WHERE Email = '$email'";
             if(mysqli_query($database, $query)) {
-                echo "<p style='color:green; text-align:center;'>Hasło zostało zmienione pomyślnie.</p>";
+                echo "<p class='notice success'>Hasło zostało zmienione pomyślnie.</p>";
             } else {
-                echo "<p style='color:red; text-align:center;'>Błąd zmiany hasła: " . mysqli_error($database) . "</p>";
+                echo "<p class='notice error'>Błąd zmiany hasła: " . htmlspecialchars(mysqli_error($database)) . "</p>";
             }
         } else {
-            echo "<p style='color:red; text-align:center;'>Hasła muszą być takie same i nie mogą być puste.</p>";
+            echo "<p class='notice error'>Hasła muszą być takie same i nie mogą być puste.</p>";
         }
     }
 
     // Wyświetlanie formularzy
     echo '
-    <center>
+    <section class="panel-section">
         <h2>Zarządzaj kontem</h2>
-        
+
         <!-- Formularz zmiany emaila -->
         <form name="EmailForm" method="POST" action="account.php">
             <b>Zmień email</b><br>
@@ -60,7 +60,7 @@ if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
             <input type="text" name="em2" required value="'.$email.'"><br>
             <button type="submit" name="change_em">Zmień email</button>
         </form>
-        
+
         <br><hr style="width: 15%;"><br>
 
         <!-- Formularz zmiany hasła -->
@@ -70,11 +70,11 @@ if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
             <input type="password" name="pass2" required placeholder="Powtórz nowe hasło"><br>
             <button type="submit" name="change_pass">Zmień hasło</button>
         </form>
-    </center>
+    </section>
     ';
-    
+
     mysqli_close($database);
 } else {
-    echo "Brak dostępu";
+    echo "<p class='notice error'>Brak dostępu</p>";
 }
 ?>

@@ -38,3 +38,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logowanie | Panel RB</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page-content">
+    <?php if (!empty($error)): ?>
+        <p class="notice error"><?= htmlspecialchars($error) ?></p>
+        <p class="footer-link"><a href="index.php">Wróć do logowania</a></p>
+    <?php endif; ?>
+</main>
+</body>
+</html>

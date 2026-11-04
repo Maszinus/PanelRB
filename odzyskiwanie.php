@@ -73,22 +73,25 @@ mysqli_close($database);
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odzyskiwanie konta</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <?php if (!empty($error)): ?>
-    <p style="color: red;">
+    <p class="notice error">
         <?= htmlspecialchars($error) ?>
     </p>
 <?php endif; ?>
 
 <?php if (!empty($success)): ?>
-    <p style="color: green;">
+    <p class="notice success">
         <?= htmlspecialchars($success) ?>
     </p>
 <?php endif; ?>
 
+<main class="page-content">
 <?php if (!isset($_SESSION['odzyskiwanie_id'])): ?>
 
     <form name="Odzyskiwanie" method="POST" action="odzyskiwanie.php">
@@ -114,6 +117,7 @@ mysqli_close($database);
     </form>
 
 <?php endif; ?>
+</main>
 
 </body>
 </html>
