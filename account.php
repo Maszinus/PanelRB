@@ -1,6 +1,22 @@
 <?php
 // Upewnij się, że sesja jest uruchomiona na początku pliku, jeśli jeszcze jej nie ma
-// session_start();
+$standalone = basename($_SERVER['SCRIPT_FILENAME'] ?? '') === basename(__FILE__);
+if ($standalone && session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
+if ($standalone) {
+    echo '<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarządzaj kontem | Panel RB</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page-content">';
+}
 
 if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
     $database = mysqli_connect('127.0.0.1', 'root', '', '5td_panel');
@@ -76,5 +92,11 @@ if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
     mysqli_close($database);
 } else {
     echo "<p class='notice error'>Brak dostępu</p>";
+}
+
+if ($standalone) {
+    echo '</main>
+</body>
+</html>';
 }
 ?>
