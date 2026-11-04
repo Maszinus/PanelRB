@@ -54,17 +54,17 @@ if(isset($_SESSION['type']) && $_SESSION['type'] >= 1){
         <h2>Zarządzaj kontem</h2>
 
         <!-- Formularz zmiany emaila -->
-        <form name="EmailForm" method="POST" action="account.php">
+        <form name="EmailForm" method="POST" action="panel.php">
             <b>Zmień email</b><br>
-            <input type="text" name="em1" required value="'.$email.'"><br>
-            <input type="text" name="em2" required value="'.$email.'"><br>
+            <input type="email" name="em1" required value="'.htmlspecialchars($email, ENT_QUOTES, 'UTF-8').'"><br>
+            <input type="email" name="em2" required value="'.htmlspecialchars($email, ENT_QUOTES, 'UTF-8').'"><br>
             <button type="submit" name="change_em">Zmień email</button>
         </form>
 
         <br><hr style="width: 15%;"><br>
 
         <!-- Formularz zmiany hasła -->
-        <form name="PassForm" method="POST" action="account.php">
+        <form name="PassForm" method="POST" action="panel.php">
             <b>Zmień hasło</b><br>
             <input type="password" name="pass1" required placeholder="Nowe hasło"><br>
             <input type="password" name="pass2" required placeholder="Powtórz nowe hasło"><br>
